@@ -36,11 +36,7 @@
       </header>
 
       <section class="button-modal-create">
-        <button
-          type="button"
-          class="default-button"
-          onclick="openModalRegister()"
-        >
+        <button type="button" class="default-button" onclick="openModal()">
           Cadastrar Paleta
         </button>
       </section>
@@ -48,12 +44,13 @@
       <section class="modal-overlay" id="overlay">
         <div class="modal">
           <div class="modal-header">
-            <h2>Register a palet</h2>
-            <a onclick="closeModalRegister()" class="close-modal">x</a>
+            <h2 id="title-header-modal">Register a palet</h2>
+            <a onclick="closeModal()" class="close-modal">x</a>
           </div>
 
           <div class="modal-body">
             <div>
+              <input type="hidden" id="id" />
               <input
                 type="text"
                 name="flavor"
@@ -79,9 +76,30 @@
                 id="photo"
                 placeholder="Link for the palet"
               />
-              <button class="default-button" onclick="createPalet()">
+              <button id="button-form-modal" onclick="createPalet()">
                 Register
               </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="modal-overlay" id="overlay-delete">
+        <div class="modal">
+          <div class="modal-header">
+            <h2 id="title-header-modal">Confirm</h2>
+            <a onclick="closeDeleteModal()" class="close-modal">x</a>
+          </div>
+          <div class="modal-body-delete">
+            <p>Are you sure you want to delete this palet?</p>
+            <div class="btns_delete">
+              <button
+                class="btn_delete_no btn_delete"
+                onclick="closeDeleteModal()"
+              >
+                No
+              </button>
+              <button class="btn_delete_yes btn_delete">Yes</button>
             </div>
           </div>
         </div>
