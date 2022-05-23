@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="El Geladon" title="El Geladon"" src="" width="220px" />
+  <img alt="El Geladon" title="El Geladon"" src="https://raw.githubusercontent.com/Amaro13/El-Geldadon-FrontEnd/772d68e520105ab9f939c972f0ae129e2d1cb328/assets/images/icons/logo.svg" width="220px" />
 </h1>
 
 <p align="center">
@@ -15,7 +15,7 @@
 <br>
 
 <p align="center">
-  <img alt="stream.image" src="" width="100%">
+  <img alt="stream.image" src="https://raw.githubusercontent.com/Amaro13/El-Geldadon-FrontEnd/772d68e520105ab9f939c972f0ae129e2d1cb328/assets/images/icons/logo.svg" width="100%">
 </p>
 
 ## 🚀 Tecnologies
