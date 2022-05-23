@@ -39,7 +39,7 @@ This project was developed to test the content learned during the course at Blue
 
 You can check the project rendered here: 
 
-## :memo: Licença
+## :memo: Licence
 
 This project is under MIT protection. 
 
