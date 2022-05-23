@@ -1,0 +1,112 @@
+<!-- FRONT-END -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/style.css" />
+    <title>El Geladon</title>
+  </head>
+  <body>
+    <div class="Home">
+      <header class="Home__header Header">
+        <div class="row">
+          <div class="Header__logo Logo">
+            <img
+              src="assets/images/icons/logo.svg"
+              width="70px"
+              alt="Logo El Geladon"
+              class="Logo__icon"
+            />
+            <span class="Logo__title"> El Geladon </span>
+          </div>
+
+          <div class="Header__options Options">
+            <div class="Options__bag Bag">
+              <img
+                src="assets/images/icons/sacola.svg"
+                width="40px"
+                class="Bag__icon"
+                alt="Purchase Bag"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="button-modal-create">
+        <button
+          type="button"
+          class="default-button"
+          onclick="openModalRegister()"
+        >
+          Cadastrar Paleta
+        </button>
+      </section>
+
+      <section class="modal-overlay" id="overlay">
+        <div class="modal">
+          <div class="modal-header">
+            <h2>Register a palet</h2>
+            <a onclick="closeModalRegister()" class="close-modal">x</a>
+          </div>
+
+          <div class="modal-body">
+            <div>
+              <input
+                type="text"
+                name="flavor"
+                id="flavor"
+                placeholder="Flavor"
+              />
+              <input
+                type="number"
+                name="price"
+                id="price"
+                placeholder="Palet Price"
+              />
+              <textarea
+                type="text"
+                name="description"
+                id="description"
+                placeholder="Palet Description"
+                rows="5"
+              ></textarea>
+              <input
+                type="text"
+                name="photo"
+                id="photo"
+                placeholder="Link for the palet"
+              />
+              <button class="default-button" onclick="createPalet()">
+                Register
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Find Palet</h2>
+      <div class="palet-choosen-space">
+        <div id="palet-choosen-input-space">
+          <input
+            type="number"
+            id="idPalet"
+            placeholder="Insert palet ID and click 'CHOOSE'"
+          />
+          <button class="default-button" onclick="findPaletById()">
+            CHOOSE
+          </button>
+        </div>
+        <div id="choosenpalet"></div>
+      </div>
+      <h2>Available Palets:</h2>
+      <div class="Home__container">
+        <div class="PaletList" id="paletList"></div>
+      </div>
+    </div>
+    <script src="./assets/script.js"></script>
+  </body>
+  <!-- <script src="/assets/script.js"></script> -->
+</html>
