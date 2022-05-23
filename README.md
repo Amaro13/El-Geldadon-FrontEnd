@@ -43,4 +43,4 @@ You can check the project rendered here:
 
 This project is under MIT protection. 
 
-Work, development and deployment done by Amaro Francisco 👋🏽 [Entre em contato!](https://www.linkedin.com/in/amaroribeiro/)
+Work, development and deployment done by Amaro Francisco 👋🏽 [Contact me!](https://www.linkedin.com/in/amaroribeiro/)
