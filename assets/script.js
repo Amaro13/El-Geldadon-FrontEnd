@@ -1,26 +1,25 @@
 //FRONT-END
 const baseUrl = "http://localhost:3001/palets";
-
+const msgAlert = document.querySelector(".msg-alert");
 async function findAllPalets() {
   const response = await fetch(`${baseUrl}/all-palets`);
-
   const palets = await response.json();
   palets.forEach((palet) => {
     document.getElementById("paletList").insertAdjacentHTML(
       "beforeend",
-      `<div class="PaletListItem" id="PaletListItem_${palet.id}">
+      `<div class="PaletListItem" id="PaletListItem_'${palet._id}'">
         <div>
             <div class="PaletListItem__flavor">${palet.flavor}</div>
             <div class="PaletListItem__price">R$ ${palet.price.toFixed(2)}</div>
             <div class="PaletListItem__description">${palet.description}</div>
 
             <div class="PaletListItem__actions Actions">
-              <button class="Actions__edit btn" onclick="openModal(${
-                palet.id
-              })">Edit</button> 
-              <button class="Actions__delete btn" onclick="openDeleteModal(${
-                palet.id
-              })">Delete</button> 
+              <button class="Actions__edit btn" onclick="openModal('${
+                palet._id
+              }')">Edit</button> 
+              <button class="Actions__delete btn" onclick="openDeleteModal('${
+                palet._id
+              }')">Delete</button> 
             </div>
 
           </div>
@@ -35,19 +34,54 @@ async function findAllPalets() {
 findAllPalets();
 
 const findPaletById = async () => {
-  const id = document.getElementById("idPalet").value;
+  const input = document.getElementById("search-input").value;
+  const paletsorigin = await fetch(`${baseUrl}/all-palets`);
+  const allpalets = await paletsorigin.json();
+  const selectedpalet = allpalets.find((elem) => elem.flavor == input);
+  const id = selectedpalet._id;
 
+  if (id == "" || id == undefined) {
+    localStorage.setItem("message", "Insert palet to search");
+    localStorage.setItem("type", "danger");
+
+    showMessageAlert();
+  }
   const response = await fetch(`${baseUrl}/palet/${id}`);
 
   const palet = await response.json();
+  console.log(palet.message);
+
+  if (palet.message != undefined) {
+    localStorage.setItem("message", palet.message);
+    localStorage.setItem("type", "danger");
+
+    showMessageAlert();
+  } else {
+    localStorage.setItem("message", "Success");
+    localStorage.setItem("type", "success");
+
+    showMessageAlert();
+  }
+
+  document.querySelector(".list-all").style.display = "block";
+  document.querySelector(".PaletList").style.display = "none";
 
   const ChoosenPaletDiv = document.getElementById("choosenpalet");
-
   ChoosenPaletDiv.innerHTML = `<div class="PaletCardItem">
     <div>
       <div class="PaletCardItem__flavor">${palet.flavor}</div>
       <div class="PaletCardItem__price">R$ ${palet.price.toFixed(2)}</div>
       <div class="PaletCardItem__description">${palet.description}</div>
+
+      <div class="PaletListItem__actions Actions">
+          <button class="Actions__edit btn" onclick="openModal('${
+            palet._id
+          }')">Edit</button> 
+          <button class="Actions__delete btn" onclick="openDeleteModal('${
+            palet._id
+          }')">Delete</button> 
+      </div>
+      
     </div>
       <img class="PaletCardItem__photo" src=${
         palet.photo
@@ -55,9 +89,9 @@ const findPaletById = async () => {
   </div>`;
 };
 
-async function openModal(id) {
+async function openModal(id = "") {
   document.querySelector(".modal-overlay").style.display = "flex";
-  if (id != null) {
+  if (id != "") {
     document.querySelector("#title-header-modal").innerText = "Update a Palet";
     document.querySelector("#button-form-modal").innerText = "Update";
 
@@ -68,7 +102,7 @@ async function openModal(id) {
     document.querySelector("#price").value = palet.price;
     document.querySelector("#description").value = palet.description;
     document.querySelector("#photo").value = palet.photo;
-    document.querySelector("#id").value = palet.id;
+    document.querySelector("#id").value = palet._id;
   } else {
     document.querySelector("#title-header-modal").innerText =
       "Register a Palet";
@@ -86,7 +120,7 @@ function closeModal() {
   document.querySelector("#photo").value = "";
 }
 
-async function createPalet() {
+async function submitPalet() {
   const id = document.getElementById("id").value;
   const flavor = document.querySelector("#flavor").value;
   const price = Number(document.querySelector("#price").value);
@@ -100,8 +134,8 @@ async function createPalet() {
     description,
     photo,
   };
-
-  const EditModeActivate = id > 0;
+  // console.log(palet);
+  const EditModeActivate = id != "";
 
   const endpoint = baseUrl + (EditModeActivate ? `/update/${id}` : "/create");
 
@@ -115,27 +149,23 @@ async function createPalet() {
   });
 
   const newPalet = await response.json();
-  const html = `
-  <div class="PaletListItem" id="PaletListItem_${newPalet.id}">
-    <div>
-        <div class="PaletListItem__flavor">${newPalet.flavor}</div>
-        <div class="PaletListItem__price">R$ ${newPalet.price}</div>
-        <div class="PaletListItem__description">${newPalet.description}</div>
-
-        <div class="PaletListItem__actions Actions">
-          <button class="Actions__edit btn" onclick="openModal(${newPalet.id})">Edit</button> 
-          <button class="Actions__delete btn" onclick="openDeleteModal(${newPalet.id})">Delete</button> 
-        </div>
-    </div>
-    <img class="PaletListItem__photo" src="${newPalet.photo}" alt="Palet of ${newPalet.flavor}" />
-  </div>`;
+  // document.location.reload(true);
+  if (newPalet.message != undefined) {
+    localStorage.setItem("message", newPalet.message);
+    localStorage.setItem("type", "danger");
+    showMessageAlert();
+    return;
+  }
 
   if (EditModeActivate) {
-    document.getElementById(`PaletListItem_${id}`).outerHTML = html;
+    localStorage.setItem("message", "Palet sucessfully updated");
+    localStorage.setItem("type", "success");
   } else {
-    document.getElementById("paletList").insertAdjacentHTML("beforeend", html);
+    localStorage.setItem("message", "Palet sucessfully created");
+    localStorage.setItem("type", "success");
   }
   closeModal();
+  document.location.reload(true);
 }
 
 function openDeleteModal(id) {
@@ -162,10 +192,29 @@ async function deletePalet(id) {
   });
 
   const result = await response.json();
-  alert(result.message);
+  // alert(result.message);
 
   document.getElementById("paletList").innerHTML = "";
 
+  localStorage.setItem("message", result.message);
+  localStorage.setItem("type", "success");
+
   closeDeleteModal();
-  findAllPalets();
+  // findAllPalets();
+  document.location.reload(true);
 }
+
+function closeMessageAlert() {
+  setTimeout(function () {
+    msgAlert.innerText = "";
+    msgAlert.classList.remove(localStorage.getItem("type"));
+    localStorage.clear();
+  }, 3000);
+}
+
+function showMessageAlert() {
+  msgAlert.innerText = localStorage.getItem("message");
+  msgAlert.classList.add(localStorage.getItem("type"));
+  closeMessageAlert();
+}
+showMessageAlert();

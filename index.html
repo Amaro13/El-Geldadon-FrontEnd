@@ -6,6 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/assets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/svg"
+      href="./assets/images/icons/logo.svg"
+    />
     <title>El Geladon</title>
   </head>
   <body>
@@ -23,22 +32,26 @@
           </div>
 
           <div class="Header__options Options">
-            <div class="Options__bag Bag">
-              <img
-                src="assets/images/icons/sacola.svg"
-                width="40px"
-                class="Bag__icon"
-                alt="Purchase Bag"
-              />
-            </div>
+            <input
+              type="string"
+              id="search-input"
+              placeholder="Insert palet name"
+            />
+            <button class="search-button" onclick="findPaletById()">
+              <i class="bi bi-search"></i>
+            </button>
           </div>
         </div>
       </header>
 
-      <section class="button-modal-create">
-        <button type="button" class="default-button" onclick="openModal()">
-          Cadastrar Paleta
-        </button>
+      <section class="options">
+        <span class="msg-alert"></span>
+        <div class="btns-list-card">
+          <a href="/" class="default-button list-all">List All Palets</a>
+          <button type="button" class="default-button" onclick="openModal()">
+            Register a Palet
+          </button>
+        </div>
       </section>
 
       <section class="modal-overlay" id="overlay">
@@ -76,7 +89,7 @@
                 id="photo"
                 placeholder="Link for the palet"
               />
-              <button id="button-form-modal" onclick="createPalet()">
+              <button id="button-form-modal" onclick="submitPalet()">
                 Register
               </button>
             </div>
@@ -105,23 +118,9 @@
         </div>
       </section>
 
-      <h2>Find Palet</h2>
-      <div class="palet-choosen-space">
-        <div id="palet-choosen-input-space">
-          <input
-            type="number"
-            id="idPalet"
-            placeholder="Insert palet ID and click 'CHOOSE'"
-          />
-          <button class="default-button" onclick="findPaletById()">
-            CHOOSE
-          </button>
-        </div>
-        <div id="choosenpalet"></div>
-      </div>
-      <h2>Available Palets:</h2>
       <div class="Home__container">
         <div class="PaletList" id="paletList"></div>
+        <div id="choosenpalet"></div>
       </div>
     </div>
     <script src="./assets/script.js"></script>

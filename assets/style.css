@@ -86,9 +86,14 @@ html {
 }
 
 .PaletCardItem {
-  margin: 20px 0;
+  /* margin: 20px 0; */
   height: 150px;
-  width: auto;
+  width: 350px;
+}
+
+.PaletCardItem__photo {
+  height: 150px;
+  margin-right: -60px;
 }
 
 @media (max-width: 400px) {
@@ -150,7 +155,7 @@ html {
   font-weight: 600;
   border-radius: 0.2rem;
   width: 330px;
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   font-size: 1rem;
@@ -346,9 +351,35 @@ textarea {
   color: #fff;
 }
 
-.button-modal-create {
+.options {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto 25px auto;
+  max-width: 1110px;
+}
+
+.msg-alert {
+  width: 20%;
+  text-align: center;
+  z-index: 999999;
+  font-weight: 600;
+}
+
+.success {
+  background-color: #066b33;
+  color: rgb(30, 2, 68);
+  border: solid 1px rgb(68, 2, 15);
+  padding: 0.8rem;
+  border-radius: 0.3rem;
+}
+
+.danger {
+  background-color: #890d0d;
+  color: rgb(68, 2, 15);
+  border: solid 1px rgb(68, 2, 15);
+  padding: 0.8rem;
+  border-radius: 0.3rem;
 }
 
 .Actions {
@@ -437,4 +468,42 @@ textarea {
 .btn_delete_yes:hover {
   background-color: #00b309;
   color: #fff;
+}
+
+#search-input {
+  padding: 0.5rem;
+  width: 315px;
+  border: none;
+  border-radius: 0.2rem;
+  border: 2px solid #fff;
+  outline: none;
+  font-size: 1rem;
+}
+
+.search-button {
+  background-color: transparent;
+  border: 2px solid #9400d3;
+  padding: 0.5rem;
+  color: #9400d3;
+  font-weight: 600;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: 1rem;
+  text-align: center;
+}
+.search-button:hover {
+  background-color: #9400d3;
+  color: #ffffff;
+}
+
+.list-all {
+  text-decoration: none;
+  text-align: center;
+  display: none;
+  margin-right: 1rem;
+}
+
+.btns-list-card {
+  display: flex;
 }
